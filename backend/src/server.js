@@ -1,7 +1,8 @@
 const express = require("express");
 const env = require("dotenv");
 const mongoose = require("mongoose");
-const usersRoute = require("./routes/user");
+const authRoute = require("./routes/auth");
+const adminAuthRoute = require("./routes/admin/auth");
 // const bodyParser = require("body-parser");  // deprecated
 
 // create express app
@@ -27,7 +28,8 @@ mongoose
 app.use(express.json());
 // app.use(bodyParser()); // deprecated
 
-app.use("/api", usersRoute);
+app.use("/api", authRoute);
+app.use("/api", adminAuthRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`server is running at ${process.env.PORT}`);
