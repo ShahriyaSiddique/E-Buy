@@ -1,4 +1,4 @@
-const User = require("../models/auth");
+const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
 exports.signup = (req, res) => {
@@ -78,12 +78,4 @@ exports.signin = (req, res) => {
       });
     }
   });
-};
-
-exports.requireSignin = (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
-  console.log(token);
-  const user = jwt.verify(token, process.env.JWT_SECRET_KEY);
-  req.user = user;
-  next();
 };

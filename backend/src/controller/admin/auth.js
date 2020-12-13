@@ -1,4 +1,4 @@
-const User = require("../../models/auth");
+const User = require("../../models/user");
 const jwt = require("jsonwebtoken");
 
 exports.signup = (req, res) => {
@@ -40,9 +40,13 @@ exports.signin = (req, res) => {
 
     if (user) {
       if (user.authenticate(req.body.password) && user.role === "admin") {
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY, {
-          expiresIn: "1hr",
-        });
+        const token = jwt.sign(
+          { _id: user._id, role: user.role },
+          process.env.JWT_SECRET_KEY,
+          {
+            expiresIn: "1hr",
+          }
+        );
 
         const { _id, firstName, lastName, email, role, fullname } = user;
 
