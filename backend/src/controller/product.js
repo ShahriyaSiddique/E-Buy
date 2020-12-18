@@ -11,8 +11,6 @@ exports.createProduct = (req, res) => {
     });
   }
 
-  console.log(productPicture);
-
   const product = new Product({
     name,
     slug: slugify(name),
